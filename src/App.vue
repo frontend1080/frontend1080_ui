@@ -2,7 +2,8 @@
   <div id="app">
    <h2>这是app根组件</h2>
    <!-- 在下方可以直接使用你们开发出来的组件查看效果,例如 ：-->
-   <!-- <wts-button>好好学习</wts-button> -->
+   <w-header>标题</w-header>
+   <w-button>好好</w-button>
   </div>
 </template>
 
@@ -13,6 +14,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 
 </style>

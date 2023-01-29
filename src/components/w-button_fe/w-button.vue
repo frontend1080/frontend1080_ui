@@ -10,7 +10,7 @@
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'wts-button',
+  name: 'w-button',
   props: {
 
     color: {
@@ -26,7 +26,7 @@ export default {
 
 <style lang="less" scoped>
 button {
-  widows: 100px;
+  width: 100px;
   height: 50px;
 }
 
