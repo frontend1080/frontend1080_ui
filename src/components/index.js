@@ -1,12 +1,14 @@
 // 这种方式实现了全局导入或按需导入
-import Wbutton from './w-button'
+import Wbutton from './w-button_fe'
 
-import Wheader from './w-header'
+import Wheader from './w-header_fe'
 
+import LuoDateTimePicker from '@/components/LuoDateTimePicker/LuoDateTimePicker'
 
 import YdropDown from './yft-dropDown'
 
 import Yavator from './yft-avator'
+
 import DYMessage from '@/components/dy-message'
 
 import DYIcon from '@/components/dy-icon'
@@ -20,7 +22,8 @@ const components = {
   Yavator,
   DYMessage,
   DYIcon,
-  DYUploader
+  DYUploader,
+  LuoDateTimePicker
 }
 const install = (Vue) => {
   for (const i in components) {
@@ -40,5 +43,6 @@ export {
   Yavator,
   DYMessage,
   DYIcon,
-  DYUploader
+  DYUploader,
+  LuoDateTimePicker
 }
