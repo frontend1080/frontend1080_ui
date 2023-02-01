@@ -1,0 +1,39 @@
+.dy-message {
+    width: 380px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ebebeb;
+    position: fixed;
+    z-index: 99999;
+    line-height: 20px;
+    background-color: #edf2fc;
+    padding: 15px 15px 15px 20px;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+.dy-message-content {
+    width: 380px;
+}
+
+.dy-message-fade-enter,
+.dy-message-fade-leave-to {
+    opacity: 0;
+    transform: translateY(-100px);
+}
+
+.dy-message-fade-enter-active,
+.dy-message-fade-leave-active {
+    transition: opacity 0.5s, transform 0.5s;
+}
