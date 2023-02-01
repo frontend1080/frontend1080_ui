@@ -3,10 +3,12 @@ import Wbutton from './w-button'
 
 import Wheader from './w-header'
 
+import YdropDown from './yft-dropDown'
 // 加上你们自己的导入语句导入自己的组件
 const components = {
   Wheader,
-  Wbutton
+  Wbutton,
+  YdropDown
 }
 const install = (Vue) => {
   for (const i in components) {
@@ -19,5 +21,6 @@ export default {
 }
 export {
   Wheader,
-  Wbutton
+  Wbutton,
+  YdropDown
 }
