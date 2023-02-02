@@ -7,6 +7,7 @@
   | `name`                   | 图标名字         | `String`  | 如 `icon-test43`                         |                        |
 
 ### 图标
+* 使用时要去掉前面的`icon-`，具体见使用示例
 <img src="https://github.com/frontend1080/frontend1080_ui/blob/dingyi/src/components/dy-icon/icon1.png">
 <img src="https://github.com/frontend1080/frontend1080_ui/blob/dingyi/src/components/dy-icon/icon2.png">
 <img src="https://github.com/frontend1080/frontend1080_ui/blob/dingyi/src/components/dy-icon/icon3.png">
