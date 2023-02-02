@@ -1,27 +1,30 @@
 <template>
-    <div class="dropdown">
-      <div class="dropdown-label" @click="showOptions = !showOptions">
-        {{ selectedOption }}
-        <span v-if="!showOptions" class="arrow">▼</span>
-        <span v-else class="arrow">▲</span>
-      </div>
-      <ul v-if="showOptions" class="options">
-        <li v-if="!selectOnly">
-          <input type="checkbox" v-model="allSelected" @click="selectAll" /> All
-        </li>
-        <li v-for="(option, index) in options" v-bind:key="index"
-        @click="selectOnly===true?onlySelected(index):selectOption(index)">
-          <input type="checkbox" v-model="selectedOptions[index]" /> {{ option }}
-        </li>
-      </ul>
+  <div class="dropdown">
+    <div class="dropdown-label" @click="showOptions = !showOptions">
+      {{ selectedOption }}
+      <span v-if="!showOptions" class="arrow">▼</span>
+      <span v-else class="arrow">▲</span>
     </div>
-  </template>
+    <!-- 点击现实选项 -->
+    <transition name="show">
+      <ul v-if="showOptions" class="options">
+      <li v-if="!selectOnly">
+        <input type="checkbox" v-model="allSelected" @click="selectAll" /> All
+      </li>
+      <li v-for="(option, index) in options" v-bind:key="index"
+      @click="selectOnly===true?onlySelected(index):selectOption(index)">
+        <input type="checkbox" v-model="selectedOptions[index]" /> {{ option }}
+      </li>
+    </ul>
+    </transition>
+  </div>
+</template>
 
 <script>
 export default {
   name: 'yft-dropDown',
   props: {
-    // 设置支持多选
+  // 设置支持多选
     selectOnly: {
       default: true
     },
@@ -50,7 +53,7 @@ export default {
         if (this.totalSelected === 0) {
           this.selectedOption = this.placeholder
         } else if (this.allSelected) {
-          this.selectedOption = '全选'
+          this.selectedOption = '选择全部'
         } else {
           this.selectedOption = `${this.totalSelected} 个被选中`
         }
@@ -70,7 +73,7 @@ export default {
     }
   },
   methods: {
-    // 单选功能，此处使用笨b方法
+  // 单选功能，此处使用笨b方法
     onlySelected (index) {
       if (this.selectedOptions[index] !== true) {
         this.selectedOptions = []
@@ -100,47 +103,58 @@ export default {
 }
 </script>
 
-  <style lang="less" scoped>
-  .dropdown {
-    position: relative;
-  }
+<style lang="less" scoped>
+.dropdown {
+  position: relative;
+}
 
-  .dropdown-label {
-    padding: 10px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    text-align: center;
-  }
+.dropdown-label {
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 5px;
+  color:#9a9a9a
+}
 
-  .arrow {
-    float: right;
-  }
+.arrow {
+  float: right;
+}
 
-  .options {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    z-index: 10;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  z-index: 10;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 5px;
+}
 
-  .options li {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    cursor: pointer;
-  }
+.options li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
 
-  .options li:hover {
-    background-color: #f5f5f5;
-  }
+.options li:hover {
+  background-color: #eaf2ff;
+}
 
-  .options input[type="checkbox"] {
-    margin-right: 10px;
-  }
-  </style>
+.options input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.show-enter-active, .show-leave-active {
+  transition: opacity .6s;
+}
+
+.show-enter, .show-leave-to {
+  opacity: 0;
+}
+</style>
