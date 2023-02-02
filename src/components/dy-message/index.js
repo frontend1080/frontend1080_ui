@@ -1,13 +1,15 @@
+/* eslint-disable prefer-const */
 import DYMessage from './dy-message.vue'
 
-let instance
-const instances = []
-const Top = 16
+let instances = []
+let Top = 16
 let index = 0
 export default {
   install (Vue) {
-    function computedTop () {
-      return instances.reduce((acc, cul) => {
+    function computedTop (position) {
+      let filterInstances = instances.filter(instance => instance.position === position)
+      console.log(filterInstances)
+      return filterInstances.reduce((acc, cul) => {
         return cul.$el.offsetHeight + acc + Top
       }, Top)
     }
@@ -23,20 +25,18 @@ export default {
       }
       instances.splice(i, 1)
       for (;i < instances.length; i++) {
-        instances[i].Top = removeTop
-        removeTop = instances[i].Top
+        [instances[i].Top, removeTop] = [removeTop, instances[i].Top]
       }
     }
 
     function getInstance (options) {
       const Ctor = Vue.extend(DYMessage)
 
-      instance = new Ctor({
+      let instance = new Ctor({
         propsData: options
-        // el: document.createElement('div')
       }).$mount(document.createElement('div'))
 
-      instance.Top = computedTop()
+      instance.Top = computedTop(instance.position)
 
       instance.id = 'message-' + index++
 
@@ -50,8 +50,6 @@ export default {
       const instance = getInstance(options)
 
       // instance.message = options.message
-
-      document.body.appendChild(instance.$el)
 
       instances.push(instance)
     }
