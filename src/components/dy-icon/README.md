@@ -6,6 +6,11 @@
   | ------------------------ | ---------------- | ----------- | ---------------------------------- | ---------------- |
   | `name`                   | 图标名字         | `String`  | 如 `icon-test43`                         |                        |
 
+### 图标
+<img src="https://github.com/frontend1080/frontend1080_ui/blob/dingyi/src/components/dy-icon/icon1.png">
+<img src="https://github.com/frontend1080/frontend1080_ui/blob/dingyi/src/components/dy-icon/icon2.png">
+<img src="https://github.com/frontend1080/frontend1080_ui/blob/dingyi/src/components/dy-icon/icon3.png">
+
 ### 使用示例
 ```
 <template>
