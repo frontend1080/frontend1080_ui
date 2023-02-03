@@ -3,6 +3,7 @@
    <h2>这是app根组件</h2>
    <button @click="showMessage">点击我</button>
    <button @click="showMessage1">点击我</button>
+   <dy-icon name="icon-test44"></dy-icon>
   </div>
 </template>
 

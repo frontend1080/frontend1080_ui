@@ -1,9 +1,9 @@
 /* eslint-disable prefer-const */
 import DYMessage from './dy-message.vue'
-
 let instances = []
 let Top = 16
 let index = 0
+
 export default {
   install (Vue) {
     function computedTop (position) {

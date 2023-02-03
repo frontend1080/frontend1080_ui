@@ -1,6 +1,6 @@
 import DYIcon from './dy-icon.vue'
 
-DYIcon.install = function (Vue) {
+DYIcon.install = (Vue) => {
   Vue.component(DYIcon.name, DYIcon)
 }
 
