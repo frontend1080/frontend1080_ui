@@ -1,4 +1,3 @@
-
 <template>
   <div class="dy-uploader-wrapper">
     <div class="dy-uploader-imagelist">
@@ -28,7 +27,8 @@ export default {
   },
   data () {
     return {
-      Files: []
+      Files: [],
+      tempImages: []
     }
   },
   methods: {
@@ -36,6 +36,7 @@ export default {
       // eslint-disable-next-line prefer-const
       let handler = {
         click: () => {
+          this.$refs.file.value = ''
           this.$refs.file.click()
         },
         change: (event) => {
@@ -44,6 +45,48 @@ export default {
         }
       }
       handler[type](event)
+    },
+    handleImages (files) {
+      if (window.URL && window.URL.createObjectURL) {
+        this.createObjectURL(files)
+      } else {
+        this.createBase64Image(files)
+      }
+    },
+    createObjectURL (files) {
+      // eslint-disable-next-line prefer-const
+      let filesArray = files.map(file => ({
+        file,
+        url: URL.createObjectURL(file)
+      }))
+      this.tempImages = filesArray
+    },
+    createBase64Image (files) {
+      const handleFile = function (file) {
+        return new Promise((resolve, reject) => {
+          // eslint-disable-next-line prefer-const
+          let reader = new FileReader()
+          reader.readAsDataURL(file)
+          reader.onload = e => {
+            resolve(e.target.result)
+          }
+          // eslint-disable-next-line node/handle-callback-err
+          reader.onerror = error => {
+            // eslint-disable-next-line prefer-promise-reject-errors
+            reject('文件读取失败').catch((e) => {})
+          }
+        })
+      }
+      // eslint-disable-next-line prefer-const
+      let filesPromises = files.map(handleFile)
+      Promise.all(filesPromises).then(results => {
+        this.tempImages = results.map((res, index) => {
+          return {
+            url: res,
+            file: files[index]
+          }
+        })
+      })
     }
   },
   watch: {
@@ -54,12 +97,18 @@ export default {
       // eslint-disable-next-line prefer-const
       let { size, accept } = this
       if (files.some(file => file.size > size)) {
-        this.onError(`超过文件最大限制${size}`)
+        this.onError(`超过文件最大限制${size}k`)
       }
       if (files.some(file => !~accept.indexOf(file.type))) {
         this.onError(`只接受${accept}类型文件`)
       }
+      this.handleImages(files)
+    },
+    handleImages (files) {
+      console.log('处理过后的image：')
+      console.log(files)
     }
+
   }
 }
 </script>

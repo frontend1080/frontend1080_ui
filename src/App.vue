@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-   <!-- <h2>这是app根组件</h2>
+   <h2>这是app根组件</h2>
    <button @click="showMessage">点击我</button>
    <button @click="showMessage1">点击我</button>
-   <dy-icon name="icon-test44"></dy-icon> -->
-   <div>
+   <dy-icon name="icon-test44"></dy-icon>
+   <!-- <div>
     <dy-uploader accept="image/png, image/jpeg" :size="150*1024" :on-success="uploadSuccess" :on-error="uploadError">
       <div class="uploader-area" slot="uploader-area">
         <dy-icon name="icon-test17"></dy-icon>
@@ -14,7 +14,7 @@
         只能上传jpg/png文件，且不超过500kb
       </div>
     </dy-uploader>
-   </div>
+   </div> -->
   </div>
 </template>
 
@@ -25,34 +25,34 @@ export default {
   components: { dyIcon },
   name: 'App',
   methods: {
-    uploadSuccess () {
+    // uploadSuccess () {
 
-    },
-    uploadError (msg) {
-      this.$message({
-        message: msg,
-        autoClose: false,
-        type: 'error'
-      })
-    }
-    // showMessage () {
-    //   this.$message({
-    //     message: '我是一个message 消息提示',
-    //     duration: 3000,
-    //     autoClose: false,
-    //     position: 'right',
-    //     type: 'success'
-    //   })
     // },
-    // showMessage1 () {
+    // uploadError (msg) {
     //   this.$message({
-    //     message: '我是一个message 消息提示',
-    //     duration: 3000,
+    //     message: msg,
     //     autoClose: false,
-    //     position: 'center',
-    //     type: 'info'
+    //     type: 'error'
     //   })
     // }
+    showMessage () {
+      this.$message({
+        message: '我是一个message 消息提示',
+        duration: 3000,
+        autoClose: false,
+        position: 'right',
+        type: 'success'
+      })
+    },
+    showMessage1 () {
+      this.$message({
+        message: '我是一个message 消息提示',
+        duration: 3000,
+        autoClose: false,
+        position: 'center',
+        type: 'info'
+      })
+    }
   }
 }
 </script>
