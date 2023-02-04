@@ -1,5 +1,6 @@
 /* eslint-disable prefer-const */
 import DYMessage from './dy-message.vue'
+// import Vue from 'vue'
 let instances = []
 let Top = 16
 let index = 0

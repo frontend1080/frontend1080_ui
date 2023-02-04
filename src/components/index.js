@@ -6,12 +6,15 @@ import Wheader from './w-header'
 // import DYMessage from '@/components/dy-message'
 
 import DYIcon from '@/components/dy-icon'
+
+import DYUploader from './dy-uploader'
 // 加上你们自己的导入语句导入自己的组件
 const components = {
   Wheader,
   Wbutton,
   // DYMessage,
-  DYIcon
+  DYIcon,
+  DYUploader
 }
 const install = (Vue) => {
   for (const i in components) {
@@ -26,5 +29,6 @@ export {
   Wheader,
   Wbutton,
   // DYMessage,
-  DYIcon
+  DYIcon,
+  DYUploader
 }
