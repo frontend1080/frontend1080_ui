@@ -5,7 +5,7 @@
    <button @click="showMessage1">点击我</button>
    <dy-icon name="icon-test44"></dy-icon> -->
    <div>
-    <dy-uploader accept="image/png, image/jpeg" :size="500*1024" :on-success="uploadSuccess" :on-error="uploadError">
+    <dy-uploader accept="image/png, image/jpeg" :size="500*1024" :multiple="true" :on-success="uploadSuccess" :on-error="uploadError">
       <div class="uploader-area" slot="uploader-area">
         <dy-icon name="icon-test17"></dy-icon>
         <div class="dy-uploader--text">将文件拖到此处，或<em>点击上传</em></div>

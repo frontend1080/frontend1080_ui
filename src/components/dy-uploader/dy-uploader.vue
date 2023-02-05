@@ -12,11 +12,15 @@
       </ul>
         <div
         class="dy-uploader-container"
+        @dragover="prevent"
+        @dragenter="prevent"
+        @drop="(event) => handleFileUploader(event,'drop')"
         @click="(event) => handleFileUploader(event,'click')"
         >
             <slot name="uploader-area"></slot>
             <input
             type="file"
+            :multiple="multiple"
             class="dy-file__invisible"
             ref="file"
             @change = "(event) => handleFileUploader(event,'change')">
@@ -40,6 +44,10 @@ export default {
     size: {
       type: Number
     },
+    multiple: {
+      type: Boolean,
+      default: false
+    },
     onSuccess: Function,
     onError: Function
   },
@@ -51,6 +59,9 @@ export default {
     }
   },
   methods: {
+    prevent (event) {
+      event.preventDefault()
+    },
     handleFileUploader (event, type) {
       // eslint-disable-next-line prefer-const
       let handler = {
@@ -61,6 +72,10 @@ export default {
         change: (event) => {
           console.log(event.target.files)
           this.Files = event.target.files
+        },
+        drop: (event) => {
+          event.preventDefault()
+          this.Files = event.dataTransfer.files
         }
       }
       handler[type](event)
