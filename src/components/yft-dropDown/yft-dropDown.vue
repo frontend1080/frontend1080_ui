@@ -1,33 +1,64 @@
 <template>
-  <div class="dropdown">
-    <div class="dropdown-label" @click="showOptions = !showOptions">
-      {{ selectedOption }}
-      <span v-if="!showOptions" class="arrow">▼</span>
+  <div class="main">
+    <!-- 单选/多选功能 -->
+  <div class="dropdown" v-if="!cascade">
+      <div class="dropdown-label" @click="showOptions = !showOptions">
+        {{selectedOptions.length ? selectedOptions.join(', ') : placeholder}}
+        <span v-if="!showOptions" class="arrow">▼</span>
+        <span v-else class="arrow">▲</span>
+      </div>
+      <transition name="show">
+        <ul v-if="showOptions" class="options">
+          <div v-for="group in options" v-bind:key="group">
+            <template v-if="group.label">
+              <div class="group-label">{{group.label}}</div>
+            </template>
+            <li v-for="option in group.options"
+            @click="mutipile===false?onlySelected(option):selectOption(option)"
+            v-bind:key="option"
+            >
+            <span v-if="selectedOptions.includes(option)">✓</span> {{option}}
+          </li>
+        </div>
+      </ul>
+      </transition>
+    </div>
+
+    <!-- 此处实现级联功能 -->
+    <div class="dropdown" v-if="cascade">
+      <div class="dropdown-label" @click="showLevel1 = !showLevel1">
+        {{selectedLevel1.length ? selectedLevel1 : placeholder}}
+        <span v-if="!showLevel1" class="arrow">▼</span>
+        <span v-else class="arrow">▲</span>
+      </div>
+      <transition name="show">
+        <ul v-if="showLevel1" class="options">
+          <li v-for="option1 in options" @click="selectLevel1(option1)" v-bind:key="option1">{{ option1.label }}</li>
+        </ul>
+      </transition>
+    </div>
+    <!-- 二级 -->
+    <div class="dropdown">
+    <div class="dropdown-label" @click="showLevel2 = !showLevel2">
+      {{selectedLevel2.length ? selectedLevel2 : placeholder}}
+      <span v-if="!showLevel2" class="arrow">▼</span>
       <span v-else class="arrow">▲</span>
     </div>
-    <!-- 点击现实选项 -->
     <transition name="show">
-      <ul v-if="showOptions" class="options">
-      <li v-if="!selectOnly">
-        <input type="checkbox" v-model="allSelected" @click="selectAll" /> All
-      </li>
-      <li v-for="(option, index) in options" v-bind:key="index"
-      @click="selectOnly===true?onlySelected(index):selectOption(index)">
-        <input type="checkbox" v-model="selectedOptions[index]" /> {{ option }}
-      </li>
-    </ul>
+      <ul v-if="selectedLevel1.length > 0 && showLevel2 === true" class="options">
+        <li v-for="option2 in options2" @click="selectLevel2(option2)" v-bind:key="option2">{{ option2 }}</li>
+      </ul>
     </transition>
   </div>
-</template>
+
+  </div>
+  </template>
 
 <script>
+// import axios from 'axios';
 export default {
   name: 'yft-dropDown',
   props: {
-  // 设置支持多选
-    selectOnly: {
-      default: true
-    },
     options: {
       type: Array,
       required: true
@@ -35,126 +66,125 @@ export default {
     placeholder: {
       type: String,
       default: '-------请选择-------'
+    },
+    // 设置支持多选
+    mutipile: {
+      type: Boolean,
+      default: false
+    },
+    // 设置级联
+    cascade: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
     return {
       showOptions: false, // 记录下拉选择状态
-      selectedOption: this.placeholder,
       selectedOptions: [], // 记录当前选项状态
-      allSelected: false, // 记录当前全选框状态
-      totalSelected: 0 // 记录当前选中个数
+      // 级联
+      selectedLevel1: '', // 一级选项
+      selectedLevel2: '', // 二级选项
+      showLevel1: false,
+      showLevel2: false
     }
   },
-  // 使用 watch 钩子监听两个数据的变化，实现了全选/全不选的功能。
-  watch: {
-    selectedOptions: {
-      handler () {
-        if (this.totalSelected === 0) {
-          this.selectedOption = this.placeholder
-        } else if (this.allSelected) {
-          this.selectedOption = '选择全部'
-        } else {
-          this.selectedOption = `${this.totalSelected} 个被选中`
-        }
-      },
-      deep: true
-    },
-    allSelected: {
-      handler (val) {
-        if (val) {
-          this.selectedOptions = this.options.map(() => true)
-          this.totalSelected = this.selectedOptions.length
-        } else {
-          this.selectedOptions = []
-          this.totalSelected = 0
-        }
-      }
+  // 绑定级联
+  computed: {
+    options2 () {
+      return this.options.find(option1 => option1.label === this.selectedLevel1).options
     }
   },
   methods: {
-  // 单选功能，此处使用笨b方法
-    onlySelected (index) {
-      if (this.selectedOptions[index] !== true) {
-        this.selectedOptions = []
-        this.selectedOptions[index] = true
-        this.totalSelected = 1
-      } else {
-        this.selectedOptions = []
-        this.totalSelected = 0
-        this.selectedOptions[index] = false
-      }
+    onlySelected (option) {
+      this.selectedOptions.pop()
+      this.selectedOptions.push(option)
     },
     // 多选功能
-    selectOption (index) {
-      this.$set(this.selectedOptions, index, !this.selectedOptions[index])
-      this.totalSelected = 0
-      for (let i = 0; i < this.selectedOptions.length; i++) {
-        if (this.selectedOptions[i] === true) {
-          this.totalSelected++
-        }
+    selectOption (option) {
+      const index = this.selectedOptions.indexOf(option)
+      console.log(index)
+      if (index === -1) {
+        this.selectedOptions.push(option)
+      } else {
+        this.selectedOptions.splice(index, 1)
       }
     },
-    // 全选/全不选
-    selectAll () {
-      this.allSelected = !this.allSelected
+
+    // 级联功能
+    selectLevel1 (option1) {
+      this.selectedLevel1 = option1.label
+      this.showLevel1 = false
+      this.selectedLevel2 = ''
+    },
+    selectLevel2 (option2) {
+      this.selectedLevel2 = option2
+      this.showLevel2 = false
     }
   }
 }
 </script>
 
-<style lang="less" scoped>
-.dropdown {
-  position: relative;
-}
+  <style lang="less" scoped>
+  .main {
+    display: flex;
+  }
+  .dropdown {
+    position: relative;
+    height: 30px;
+    width: 200px;
+  }
 
-.dropdown-label {
-  padding: 10px;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  text-align: center;
-  border-radius: 5px;
-  color:#9a9a9a
-}
+  .dropdown-label {
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    color:#9a9a9a
+  }
 
-.arrow {
-  float: right;
-}
+  .arrow {
+    float: right;
+  }
 
-.options {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  z-index: 10;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border-radius: 5px;
-}
+  .options {
+    position: absolute;
+    /* top: 100%; */
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 10;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+  }
 
-.options li {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  cursor: pointer;
-}
+  .options li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+  }
 
-.options li:hover {
-  background-color: #eaf2ff;
-}
+  .options li:hover {
+    background-color: #eaf2ff;
+  }
 
-.options input[type="checkbox"] {
-  margin-right: 10px;
-}
+  .group-label{
+    height: 30px;
+    background-color: #cccccc;
+    text-align: center;
+    line-height: 30px;
+  }
 
-.show-enter-active, .show-leave-active {
-  transition: opacity .6s;
-}
+  .show-enter-active, .show-leave-active {
+    transition: opacity .6s;
+  }
 
-.show-enter, .show-leave-to {
-  opacity: 0;
-}
-</style>
+  .show-enter, .show-leave-to {
+    opacity: 0;
+  }
+  </style>
