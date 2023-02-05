@@ -1,9 +1,25 @@
 <template>
   <div class="dy-uploader-wrapper">
     <div class="dy-uploader-imagelist">
-        <div class="dy-uploader-container" @click="(event) => handleFileUploader(event,'click')">
+      <ul class="preview-images-list">
+        <li v-for="(file,index) in previewImages" :key="index">
+          <span class="preview-delete-icon">
+            <dy-icon name="icon-test" @click="previewImage(index)"></dy-icon>
+            <dy-icon name="icon-test44" @click="remove(index)"></dy-icon>
+          </span>
+          <img :src="file.url" alt="">
+        </li>
+      </ul>
+        <div
+        class="dy-uploader-container"
+        @click="(event) => handleFileUploader(event,'click')"
+        >
             <slot name="uploader-area"></slot>
-            <input type="file" class="dy-file__invisible" ref="file" @change = "(event) => handleFileUploader(event,'change')">
+            <input
+            type="file"
+            class="dy-file__invisible"
+            ref="file"
+            @change = "(event) => handleFileUploader(event,'change')">
         </div>
     </div>
     <div>
@@ -13,7 +29,9 @@
 </template>
 
 <script>
+import dyIcon from '../dy-icon/dy-icon.vue'
 export default {
+  components: { dyIcon },
   name: 'dy-uploader',
   props: {
     accept: {
@@ -28,7 +46,8 @@ export default {
   data () {
     return {
       Files: [],
-      tempImages: []
+      tempImages: [],
+      previewImages: []
     }
   },
   methods: {
@@ -47,8 +66,11 @@ export default {
       handler[type](event)
     },
     handleImages (files) {
+      console.log('window.URL', window.URL)
+      console.log('window.URL.createObjectURL', window.URL.createObjectURL)
       if (window.URL && window.URL.createObjectURL) {
         this.createObjectURL(files)
+        console.log(this.tempImages)
       } else {
         this.createBase64Image(files)
       }
@@ -87,6 +109,12 @@ export default {
           }
         })
       })
+    },
+    remove (index) {
+      this.previewImages.splice(index, 1)
+    },
+    previewImage (index) {
+      console.log(index)
     }
   },
   watch: {
@@ -104,9 +132,10 @@ export default {
       }
       this.handleImages(files)
     },
-    handleImages (files) {
+    tempImages (value) {
       console.log('处理过后的image：')
-      console.log(files)
+      console.log(value)
+      this.previewImages = [...this.previewImages, ...value]
     }
 
   }
