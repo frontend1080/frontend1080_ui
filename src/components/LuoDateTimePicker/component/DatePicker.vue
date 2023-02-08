@@ -94,21 +94,23 @@ export default {
   },
   computed: {
     returnDate () {
+      const resultStart = this.dateData[0] + ' ' + this.timeData[0]
+      const resultEnd = this.dateData[1] + ' ' + this.timeData[1]
       if (this.isAllowSelectArea) {
         if (this.isNeedTime) {
           if (this.dateData[1]) {
-            return `${this.dateData[0]} ${this.timeData[0]} 至 ${this.dateData[1]} ${this.timeData[1]}`
+            return `${formatDateFilter(resultStart, this.format)} 至 ${formatDateFilter(resultEnd, this.format)}`
           }
-          return `${this.dateData[0]} ${this.timeData[0]}`
+          return formatDateFilter(resultStart, this.format)
         } else if (this.dateData[1]) {
-          return `${this.dateData[0]} 至 ${this.dateData[1]}`
+          return `${formatDateFilter(this.dateData[0], this.format)} 至 ${formatDateFilter(this.dateData[1], this.format)}`
         }
-        return this.dateData[0]
+        return formatDateFilter(this.dateData[0], this.format)
       } else if (this.dateData[0]) {
         if (this.isNeedTime) {
-          return `${this.dateData[0]} ${this.timeData[0]}`
+          return formatDateFilter(resultStart, this.format)
         }
-        return `${this.dateData[0]}`
+        return formatDateFilter(this.dateData[0], this.format)
       }
       return null
     },
@@ -206,7 +208,7 @@ export default {
         } else if (targetClassList.contains('date-select__day')) {
           const dayType = judgeDayType(targetClassList)
           setStartEndDate(dayType, $target, this)
-          this.dateData = [formatDateFilter(this.start, this.format), formatDateFilter(this.end, this.format)]
+          this.dateData = [formatDateFilter(this.start, 'yyyy-MM-dd'), formatDateFilter(this.end, 'yyyy-MM-dd')]
         }
         this.reRender()
       },

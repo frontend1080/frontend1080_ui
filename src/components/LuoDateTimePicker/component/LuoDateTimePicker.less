@@ -1,3 +1,8 @@
+@width: var(--width);
+@height: var(--height);
+@font-size: var(--font-size);
+@font-color: var(--font-color);
+
 // 共用
 .time-selected {
   background-color: cornflowerblue;
@@ -207,11 +212,11 @@
 
 // 选择框
 .date-select__input {
-  height: 30px;
-  width: 343px;
-  line-height: 30px;
-  font-size: 17px;
-  color: black;
+  height: @height;
+  width: @width;
+  line-height: @height;
+  font-size: @font-size;
+  color: @font-color;
   border: 1px solid #b2afaf;
   border-radius: 5px;
   padding: 5px 15px;

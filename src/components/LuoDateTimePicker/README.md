@@ -18,6 +18,10 @@
 | `min-date`             | 最小可选择时间   | `Number`                     | 十位时间戳            | `0`          |                                                                                             |
 | `max-date`             | 最大可选择时间   | `Number`                     | 十位时间戳            | `0`          |                                                                                             |
 | `format`               | 时间格式化形式   | `string`                     | 如 `yyyy-MM-dd`     | `yyyy-MM-dd` |                                                                                             |
+| `width`                | 输入框宽度       | `string`                     |                       | `343px`      | `200px`?`100%`                                                                         |
+| `height`               | 输入框高度       | `string`                     |                       | `30px`       | `200px`?`100%`                                                                         |
+| `font-size`            | 输入框字号       | `string`                     |                       | `17px`       | `200px`                                                                                   |
+| `font-color`           | 输入框字体颜色   | `string`                     |                       | `black`      | `black`                                                                                   |
 
 | format 参数                                        | 说明案例               |
 | -------------------------------------------------- | ---------------------- |
@@ -44,7 +48,7 @@
         :is-allow-select-area="true"
         :is-need-time="true"
         :min-date="1675267200"
-	:max-date="1676822400"
+        :max-date="1676822400"
         :format="formatData"
         @change="changeDate"
       />
@@ -61,14 +65,13 @@ export default {
   },
   data () {
     return {
-      selectData: ['2023-01-11', '2023-01-15'],
-      formatData: 'yyyy-MM-dd'
+      selectData: ['2023-01-11 22:22:22', '2023-01-15 22:22:22'],
+      formatData: 'yyyy-MM-dd HH:mm:ss'
     }
   },
   methods: {
     changeDate (startTime, endTime) {
-      this.selectData[0] = startTime
-      this.selectData[1] = endTime
+      console.log(startTime, endTime)
     }
   }
 }
