@@ -11,9 +11,6 @@
   | `alt`                    | 默认显示内容     | `String`  | 如 `请选择`                                  | `请选择图片`           |
   | `shape`                  | 头像形状         | `String` | `square`、`circle`                   | `circle`                  |
   | `size`                   | 头像大小         | `String` | `large`、`small`                     | `normal`                  |
-### 关于options参数：
-    1.若使用单选/多选功能：label: 为分组,options:为选项
-    1.若使用级联功能：label: 为一级选项,options:为二级选项
 
 ## 使用示例
 ```
