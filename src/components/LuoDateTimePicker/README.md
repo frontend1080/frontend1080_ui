@@ -1,32 +1,81 @@
-##  日期选择器（LuoDateTimerPicker）
+## 日期选择器（LuoDateTimerPicker）
 
-* **进度**
+**功能总览**
 
-  * 支持日期、时间选择
-  * 支持日期、时间的范围选择
-  * 支持部分 format 参数（附后）
-* **思路：**
+* 支持日期、时间、日期时间选择
+* 支持日期、时间、日期时间的范围选择
+* 支持设定最大/最小不可选日期
+* 支持部分 format 参数（附后）
 
-  * 整体由一个日期输入框和一个日历面板组成。点击输入框弹出日历面板，在日历面板上执行所有操作。
-  * 难点关键在于对日期的把握，通过 `setMonthDate` 函数获取全月的信息，以及必要的前、后月的部分信息，如：当月1号为周四，那么前三天就要做出判断；月尾情况类似。
-  * 其余难点在样式：日期与时间选择面板的切换、单日选择与范围选择面板的切换、只日期与日期和时间模式间的切换等。需要通过部分信号变量来控制。
-* **相关参数**
 
-  | 参数                     | 说明             | 类型        | 可选值                 | 默认值         |
-  | ------------------------ | ---------------- | ----------- | ---------------------- | -------------- |
-  | `is-allow-select-area` | 是否支持范围选择 | `boolean` | `true` 或?`false` | `true`       |
-  | `is-need-time`         | 是否支持时间选择 | `boolean` | `true` 或?`false` | `true`       |
-  | `is-allow-future-date` | 是否禁用未来时间 | `boolean` | `true` 或?`false` | `false`      |
-  | `format`               | 时间格式化形式   | `string`  | 如 `yyyy-MM-dd`      | `yyyy-MM-dd` |
+**相关参数**
 
-  | format 参数                                         | 说明案例               |
-  | --------------------------------------------------- | ---------------------- |
-  | `yyyy-M-d` 或?`yyyy-MM-dd`                     | 2022-5-5 或 2022-05-05 |
-  | `yyyy-M-d H:m:s` 或?`yyyy-M-d h:m:s`           | 2022-5-4 5:4:3         |
-  | `yyyy-MM-dd HH:mm:ss` 或?`yyyy-mm-dd hh:mm:ss` | 2022-05-04 00:00:00    |
-* **下一步：**
+| 参数                     | 说明             | 类型                           | 可选值                | 默认值         | 案例                                                                                        |
+| ------------------------ | ---------------- | ------------------------------ | --------------------- | -------------- | ------------------------------------------------------------------------------------------- |
+| `value`                | 传入的时间       | 包含两个时间字符串的 `Array` |                       |                | `['2022-01-20', '2022-11-12']` 或<br />`['2022-01-20 12:22:22', '2022-11-12 13:55:55']` |
+| `is-allow-select-area` | 是否支持范围选择 | `boolean`                    | `true` 或?`false` | `true`       |                                                                                             |
+| `is-need-time`         | 是否支持时间选择 | `boolean`                    | `true` 或?`false` | `true`       |                                                                                             |
+| `min-date`             | 最小可选择时间   | `Number`                     | 十位时间戳            | `0`          |                                                                                             |
+| `max-date`             | 最大可选择时间   | `Number`                     | 十位时间戳            | `0`          |                                                                                             |
+| `format`               | 时间格式化形式   | `string`                     | 如 `yyyy-MM-dd`     | `yyyy-MM-dd` |                                                                                             |
 
-  * 支持自定义最大/最小不可选日期/时间
-  * 语言国际化
-  * 支持手动输入
-  * 增加过渡效果
+| format 参数                                        | 说明案例               |
+| -------------------------------------------------- | ---------------------- |
+| `yyyy-M-d` 或?`yyyy-MM-dd`                     | 2022-5-5 或 2022-05-05 |
+| `yyyy-M-d H:m:s` 或?`yyyy-M-d h:m:s`           | 2022-5-4 5:4:3         |
+| `yyyy-MM-dd HH:mm:ss` 或?`yyyy-mm-dd hh:mm:ss` | 2022-05-04 00:00:00    |
+
+**事件钩子**
+
+| 事件名称       | 说明             | 回调参数                                                    |
+| -------------- | ---------------- | ----------------------------------------------------------- |
+| `changeDate` | 选择日期后的回调 | 两个时间（startTime, endTime）, 如无范围选择，则endTime为空 |
+
+
+**使用案例**
+
+```javascript
+<template>
+  <div id="app">
+    <h2>这是app根组件</h2>
+    <div style="width: 500px;margin: auto;">
+      <LuoDateTimerPicker
+        v-model="selectData"
+        :is-allow-select-area="true"
+        :is-need-time="true"
+        :min-date="1675267200"
+	:max-date="1676822400"
+        :format="formatData"
+        @change="changeDate"
+      />
+    </div>
+  </div>
+</template>
+
+<script>
+import LuoDateTimerPicker from './components/LuoDateTimePicker/component/LuoDateTimePicker'
+export default {
+  name: 'App',
+  component: {
+    LuoDateTimerPicker
+  },
+  data () {
+    return {
+      selectData: ['2023-01-11', '2023-01-15'],
+      formatData: 'yyyy-MM-dd'
+    }
+  },
+  methods: {
+    changeDate (startTime, endTime) {
+      this.selectData[0] = startTime
+      this.selectData[1] = endTime
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+
+</style>
+
+```

@@ -1,20 +1,18 @@
 <template>
   <div id="app">
     <h2>这是app根组件</h2>
-    <div style="width: 500px;margin: auto;">
-      <LuoDateTimerPicker
-        v-model="selectData"
-        :is-allow-select-area="false"
-        :is-need-time="true"
-        :format="formatData"
-        @change="changeDate"
-      />
-    </div>
+    <LuoDateTimerPicker
+      v-model="selectData"
+      :is-allow-select-area="true"
+      :is-need-time="true"
+      :format="formatData"
+      @change="changeDate"
+    />
   </div>
 </template>
 
 <script>
-import LuoDateTimerPicker from './components/LuoDateTimePicker/LuoDateTimePicker'
+import LuoDateTimerPicker from './components/LuoDateTimePicker/component/LuoDateTimePicker'
 export default {
   name: 'App',
   component: {
@@ -22,8 +20,8 @@ export default {
   },
   data () {
     return {
-      selectData: ['2023-01-10 01:08:50', '2023-01-15 12:10:50'],
-      formatData: 'yyyy-MM-dd HH:mm:ss'
+      selectData: ['2023-01-11', '2023-01-15'],
+      formatData: 'yyyy-MM-dd'
     }
   },
   methods: {
