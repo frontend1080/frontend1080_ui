@@ -3,14 +3,24 @@ import Wbutton from './w-button'
 
 import Wheader from './w-header'
 
+import DYMessage from '@/components/dy-message'
+
+import DYIcon from '@/components/dy-icon'
+
+import DYUploader from './dy-uploader'
 // 加上你们自己的导入语句导入自己的组件
 const components = {
   Wheader,
-  Wbutton
+  Wbutton,
+  DYMessage,
+  DYIcon,
+  DYUploader
 }
 const install = (Vue) => {
   for (const i in components) {
-    Vue.component(components[i].name, components[i])
+    if (components[i].name !== 'dy-message') {
+      Vue.component(components[i].name, components[i])
+    } else { Vue.use(components[i]) }
   }
 }
 export default {
@@ -19,5 +29,8 @@ export default {
 }
 export {
   Wheader,
-  Wbutton
+  Wbutton,
+  DYMessage,
+  DYIcon,
+  DYUploader
 }
