@@ -1,7 +1,7 @@
 # 组件 yft-dropDown 使用说明
 ## 功能总览
 
-  * !支持远程搜索（可能有）：尚未解决跨域问题
+  * 支持远程搜索
   * 支持多选
   * 支持多级联动选择
   * 支持选项分组
@@ -12,7 +12,8 @@
   | ------------------------ | ---------------- | ----------- | ---------------------------------- | ---------------- |
   | `options`              | 选项内容         | `Array`   | `必选`详情看使用示例                         |                          |
   | `placeholder`          | 默认显示内容     | `String`  | 如 `请选择`                                  | `-------请选择-------`                    |
-  | `mutipile`             | 是否支持多选     | `Boolean` | `true`、`false`                              | `false`                   |
+  | `multiple`             | 是否支持多选     | `Boolean` | `true`、`false`                              | `false`                   |
+  | `isInput`              | 搜索下拉框     | `Boolean` | `true`、`false`                   | `false`                  |
   | `cascade`              | 是否支持级联     | `Boolean` | `true`、`false`                   | `false`                  |
 ### 关于options参数：
     1.若使用单选/多选功能：label: 为分组,options:为选项
@@ -25,7 +26,8 @@
    <yft-dropDown 
    :options="options"
     placehoder="-------请选择-------" 
-   :mutipile = "false"
+   :multiple = "false"
+   :isInput = "false"
    :cascade = "false"
    />
   </div>

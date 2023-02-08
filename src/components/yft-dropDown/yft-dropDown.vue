@@ -1,7 +1,47 @@
 <template>
   <div class="main">
+    <!-- 搜索功能 -->
+    <template v-if="isInput">
+      <div class="dropdown">
+        <input  class="dropdown" v-model="query" @input="handleInput" @click="showOptions = !showOptions" placeholder="请输入"/>
+        <transition name="show">
+          <ul v-if="showOptions" class="options">
+            <li v-for="(option,index) in results" :key="index" @click="selectInput(option)">{{ option }}</li>
+          </ul>
+        </transition>
+      </div>
+    </template>
+    <!-- 级联功能-->
+    <template v-else-if="cascade">
+      <div class="dropdown" v-if="cascade">
+        <div class="dropdown-label" @click="showLevel1 = !showLevel1">
+          {{selectedLevel1.length ? selectedLevel1 : placeholder}}
+          <span v-if="!showLevel1" class="arrow">▼</span>
+          <span v-else class="arrow">▲</span>
+        </div>
+        <transition name="show">
+          <ul v-if="showLevel1" class="options">
+            <li v-for="(option1,index) in options" @click="selectLevel1(option1)" v-bind:key="index">{{ option1.label }}</li>
+          </ul>
+        </transition>
+      </div>
+      <!-- 二级 -->
+      <div class="dropdown" v-if="cascade">
+      <div class="dropdown-label" @click="showLevel2 = !showLevel2">
+        {{selectedLevel2.length ? selectedLevel2 : placeholder}}
+        <span v-if="!showLevel2" class="arrow">▼</span>
+        <span v-else class="arrow">▲</span>
+      </div>
+      <transition name="show">
+        <ul v-if="selectedLevel1.length > 0 && showLevel2 === true" class="options">
+          <li v-for="(option2,index) in options2" @click="selectLevel2(option2)" v-bind:key="index">{{ option2 }}</li>
+        </ul>
+      </transition>
+    </div>
+    </template>
     <!-- 单选/多选功能 -->
-  <div class="dropdown" v-if="!cascade">
+    <template v-else>
+        <div class="dropdown" v-if="!cascade">
       <div class="dropdown-label" @click="showOptions = !showOptions">
         {{selectedOptions.length ? selectedOptions.join(', ') : placeholder}}
         <span v-if="!showOptions" class="arrow">▼</span>
@@ -9,13 +49,13 @@
       </div>
       <transition name="show">
         <ul v-if="showOptions" class="options">
-          <div v-for="group in options" v-bind:key="group">
+          <div v-for="(group,index) in options" v-bind:key="index">
             <template v-if="group.label">
               <div class="group-label">{{group.label}}</div>
             </template>
-            <li v-for="option in group.options"
-            @click="mutipile===false?onlySelected(option):selectOption(option)"
-            v-bind:key="option"
+            <li v-for="(option,index) in group.options"
+            @click="multiple===false?onlySelected(option):selectOption(option)"
+            v-bind:key="index"
             >
             <span v-if="selectedOptions.includes(option)">✓</span> {{option}}
           </li>
@@ -23,39 +63,11 @@
       </ul>
       </transition>
     </div>
-
-    <!-- 此处实现级联功能 -->
-    <div class="dropdown" v-if="cascade">
-      <div class="dropdown-label" @click="showLevel1 = !showLevel1">
-        {{selectedLevel1.length ? selectedLevel1 : placeholder}}
-        <span v-if="!showLevel1" class="arrow">▼</span>
-        <span v-else class="arrow">▲</span>
-      </div>
-      <transition name="show">
-        <ul v-if="showLevel1" class="options">
-          <li v-for="option1 in options" @click="selectLevel1(option1)" v-bind:key="option1">{{ option1.label }}</li>
-        </ul>
-      </transition>
-    </div>
-    <!-- 二级 -->
-    <div class="dropdown">
-    <div class="dropdown-label" @click="showLevel2 = !showLevel2">
-      {{selectedLevel2.length ? selectedLevel2 : placeholder}}
-      <span v-if="!showLevel2" class="arrow">▼</span>
-      <span v-else class="arrow">▲</span>
-    </div>
-    <transition name="show">
-      <ul v-if="selectedLevel1.length > 0 && showLevel2 === true" class="options">
-        <li v-for="option2 in options2" @click="selectLevel2(option2)" v-bind:key="option2">{{ option2 }}</li>
-      </ul>
-    </transition>
-  </div>
-
+    </template>
   </div>
   </template>
 
 <script>
-// import axios from 'axios';
 export default {
   name: 'yft-dropDown',
   props: {
@@ -68,25 +80,41 @@ export default {
       default: '-------请选择-------'
     },
     // 设置支持多选
-    mutipile: {
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+    // 设置搜索
+    isInput: {
       type: Boolean,
       default: false
     },
     // 设置级联
     cascade: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data () {
     return {
       showOptions: false, // 记录下拉选择状态
       selectedOptions: [], // 记录当前选项状态
+      // 搜索
+      query: '',
+      results: [],
       // 级联
       selectedLevel1: '', // 一级选项
       selectedLevel2: '', // 二级选项
       showLevel1: false,
       showLevel2: false
+    }
+  },
+  // 搜索回调
+  mounted () {
+    window.baidu = {
+      sug: (json) => {
+        this.results = json.s
+      }
     }
   },
   // 绑定级联
@@ -110,7 +138,23 @@ export default {
         this.selectedOptions.splice(index, 1)
       }
     },
-
+    // 搜索功能
+    handleInput () {
+      this.showOptions = true
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.search()
+      }, 500)
+    },
+    search () {
+      const script = document.createElement('script')
+      script.src = `http://suggestion.baidu.com/su?wd=${this.query}&cd=baidu.sug`
+      document.body.appendChild(script)
+    },
+    selectInput (option) {
+      this.query = option
+      this.showOptions = false
+    },
     // 级联功能
     selectLevel1 (option1) {
       this.selectedLevel1 = option1.label
@@ -126,65 +170,5 @@ export default {
 </script>
 
   <style lang="less" scoped>
-  .main {
-    display: flex;
-  }
-  .dropdown {
-    position: relative;
-    height: 30px;
-    width: 200px;
-  }
-
-  .dropdown-label {
-    padding: 10px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 5px;
-    color:#9a9a9a
-  }
-
-  .arrow {
-    float: right;
-  }
-
-  .options {
-    position: absolute;
-    /* top: 100%; */
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    z-index: 10;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border-radius: 5px;
-  }
-
-  .options li {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    cursor: pointer;
-  }
-
-  .options li:hover {
-    background-color: #eaf2ff;
-  }
-
-  .group-label{
-    height: 30px;
-    background-color: #cccccc;
-    text-align: center;
-    line-height: 30px;
-  }
-
-  .show-enter-active, .show-leave-active {
-    transition: opacity .6s;
-  }
-
-  .show-enter, .show-leave-to {
-    opacity: 0;
-  }
+    @import "./yft-dropDown.less";
   </style>
