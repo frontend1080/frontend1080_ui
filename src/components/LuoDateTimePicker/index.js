@@ -1,4 +1,4 @@
-import LuoDateTimePicker from '@/components/LuoDateTimePicker/LuoDateTimePicker'
+import LuoDateTimePicker from '@/components/LuoDateTimePicker/component/LuoDateTimePicker'
 LuoDateTimePicker.install = (Vue) => {
   Vue.component(LuoDateTimePicker.name, LuoDateTimePicker)
 }
