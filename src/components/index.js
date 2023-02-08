@@ -3,6 +3,10 @@ import Wbutton from './w-button'
 
 import Wheader from './w-header'
 
+
+import YdropDown from './yft-dropDown'
+
+import Yavator from './yft-avator'
 import DYMessage from '@/components/dy-message'
 
 import DYIcon from '@/components/dy-icon'
@@ -12,6 +16,8 @@ import DYUploader from './dy-uploader'
 const components = {
   Wheader,
   Wbutton,
+  YdropDown,
+  Yavator,
   DYMessage,
   DYIcon,
   DYUploader
@@ -30,6 +36,8 @@ export default {
 export {
   Wheader,
   Wbutton,
+  YdropDown,
+  Yavator,
   DYMessage,
   DYIcon,
   DYUploader
