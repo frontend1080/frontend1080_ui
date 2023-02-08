@@ -1,4 +1,4 @@
-## 日期选择器（LuoDateTimerPicker）
+## 日期选择器（LuoDateTimePicker）
 
 **功能总览**
 
