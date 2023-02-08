@@ -1,0 +1,70 @@
+.dy-message {
+    width: 380px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ebebeb;
+    position: fixed;
+    z-index: 99999;
+    line-height: 20px;
+    background-color: #edf2fc;
+    padding: 15px 15px 15px 20px;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+.dy-message-content {
+    width: 380px;
+}
+
+.dy-message-fade-enter,
+.dy-message-fade-leave-to {
+    opacity: 0;
+    transform: translateY(-100px);
+}
+
+.dy-message-fade-enter-active,
+.dy-message-fade-leave-active {
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.dy-message--success {
+    background-color: #f0f9eb;
+    border-color: #e1f3d8
+}
+
+.dy-message--success .dy-message__content {
+    color: #67c23a
+}
+
+.dy-message--warning {
+    background-color: #fdf6ec;
+    border-color: #faecd8
+}
+
+.dy-message--warning .dy-message__content {
+    color: #e6a23c
+}
+
+.dy-message--error {
+    background-color: #fef0f0;
+    border-color: #fde2e2
+}
+
+.dy-message--error .dy-message__content {
+    color: #f56c6c
+}
+
+.dy-message--info .dy-message__content {
+    color: #909399
+}
