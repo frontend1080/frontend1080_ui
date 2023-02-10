@@ -3,7 +3,7 @@ import Wbutton from './w-button'
 
 import Wheader from './w-header'
 
-import LuoDateTimePicker from '@/components/LuoDateTimePicker/component/LuoDateTimePicker'
+import LuoDateTimePicker from '@/components/LuoDateTimePicker'
 
 import LuoSideNavigation from '@/components/LuoSideNavigation'
 
@@ -30,9 +30,10 @@ const components = {
 }
 const install = (Vue) => {
   for (const i in components) {
-    if (components[i].name !== 'dy-message') {
-      Vue.component(components[i].name, components[i])
-    } else { Vue.use(components[i]) }
+    // if (components[i].name !== 'dy-message') {
+    //   Vue.component(components[i].name, components[i])
+    // } else { Vue.use(components[i]) }
+    Vue.use(components[i])
   }
 }
 export default {
