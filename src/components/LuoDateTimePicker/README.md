@@ -43,7 +43,7 @@
   <div id="app">
     <h2>这是app根组件</h2>
     <div style="width: 500px;margin: auto;">
-      <LuoDateTimerPicker
+      <luo-date-time-picker
         v-model="selectData"
         :is-allow-select-area="true"
         :is-need-time="true"
