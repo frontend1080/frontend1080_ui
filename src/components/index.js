@@ -1,7 +1,7 @@
 // 这种方式实现了全局导入或按需导入
-import WButton from './w-button'
+import WButton from './wts-button'
 
-import WHeader from './w-header'
+import WHeader from './wts-header'
 
 import LuoDateTimePicker from '@/components/LuoDateTimePicker'
 
