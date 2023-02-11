@@ -39,10 +39,9 @@
 </template>
 
 <script>
-import dyIcon from './components/dy-icon/dy-icon.vue'
-
+import dyIcon from '@/components/dy-icon'
 export default {
-  components: { dyIcon },
+  components:{dyIcon}
   methods: {
     uploadSuccess () {
 

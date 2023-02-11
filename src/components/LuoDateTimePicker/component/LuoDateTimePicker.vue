@@ -35,9 +35,9 @@
 <script>
 import TimePicker from '@/components/LuoDateTimePicker/component/TimePicker'
 import DatePicker from '@/components/LuoDateTimePicker/component/DatePicker'
-import { formatDateFilter } from './LuoDateTimerPicker'
+import { formatDateFilter } from './DateTimePickerJs.js'
 export default {
-  name: 'LuoDateTimerPicker',
+  name: 'LuoDateTimePicker',
   components: { DatePicker, TimePicker },
   props: {
     value: {

@@ -41,8 +41,9 @@
 ```
 <template>
   <div id="app">
+    <h2>����app�����</h2>
     <div style="width: 500px;margin: auto;">
-      <LuoDateTimerPicker
+      <luo-date-time-picker
         v-model="selectData"
         :is-allow-select-area="true"
         :is-need-time="true"
@@ -56,12 +57,8 @@
 </template>
 
 <script>
-import LuoDateTimerPicker from './components/LuoDateTimePicker/component/LuoDateTimePicker'
 export default {
   name: 'App',
-  component: {
-    LuoDateTimerPicker
-  },
   data () {
     return {
       selectData: ['2023-01-11 22:22:22', '2023-01-15 22:22:22'],

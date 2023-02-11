@@ -36,7 +36,7 @@
 import dyIcon from '../dy-icon/dy-icon.vue'
 export default {
   components: { dyIcon },
-  name: 'dy-uploader',
+  name: 'DyUploader',
   props: {
     accept: {
       type: String

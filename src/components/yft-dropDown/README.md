@@ -23,13 +23,13 @@
 ```
 <template>
   <div id="app">
-      <yft-dropDown
-      :options="options"
-      placehoder="-------请选择-------"
-      :multiple = "false"
-      :isInput = "false"
-      :cascade = "false"
-      />
+   <yft-dropdown 
+   :options="options"
+    placehoder="-------请选择-------" 
+   :multiple = "false"
+   :isInput = "false"
+   :cascade = "false"
+   />
   </div>
 </template>
 

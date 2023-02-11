@@ -45,13 +45,8 @@
 </template>
 
 <script>
-import LuoSideNavigation from '@/components/LuoSideNavigation/LuoSideNavigation'
-
 export default {
   name: 'App',
-  components: {
-    LuoSideNavigation
-  },
   created () {
   },
   data () {

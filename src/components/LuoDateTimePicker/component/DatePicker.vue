@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { formatDateFilter, judgeDayType, fixMonthToYear, setStartEndDate, setMonthDate } from './LuoDateTimerPicker'
+import { formatDateFilter, judgeDayType, fixMonthToYear, setStartEndDate, setMonthDate } from './DateTimePickerJs'
 export default {
   name: 'DatePicker',
   props: {
