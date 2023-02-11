@@ -57,12 +57,8 @@
 </template>
 
 <script>
-import LuoDateTimerPicker from './components/LuoDateTimePicker/component/LuoDateTimePicker'
 export default {
   name: 'App',
-  component: {
-    LuoDateTimerPicker
-  },
   data () {
     return {
       selectData: ['2023-01-11 22:22:22', '2023-01-15 22:22:22'],
