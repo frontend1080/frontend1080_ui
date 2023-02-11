@@ -30,9 +30,6 @@ const components = {
 }
 const install = (Vue) => {
   for (const i in components) {
-    // if (components[i].name !== 'dy-message') {
-    //   Vue.component(components[i].name, components[i])
-    // } else { Vue.use(components[i]) }
     Vue.use(components[i])
   }
 }
