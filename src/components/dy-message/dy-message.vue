@@ -17,7 +17,7 @@
 <script>
 import dyIcon from '../dy-icon/dy-icon.vue'
 export default {
-  name: 'dy-message',
+  name: 'DyMessage',
   components: { dyIcon },
   props: {
     message: {

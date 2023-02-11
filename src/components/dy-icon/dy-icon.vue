@@ -7,7 +7,7 @@
 <script>
 import '../../assets/js/iconfont.js'
 export default {
-  name: 'dy-icon',
+  name: 'DyIcon',
   props: {
     name: {
       type: String,
