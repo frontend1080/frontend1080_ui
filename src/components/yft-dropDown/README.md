@@ -23,7 +23,7 @@
 ```
 <template>
   <div id="app">
-   <yft-dropDown 
+   <yft-dropdown 
    :options="options"
     placehoder="-------请选择-------" 
    :multiple = "false"

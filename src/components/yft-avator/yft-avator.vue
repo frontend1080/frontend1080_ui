@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'yft-avator',
+  name: 'YftAvator',
   props: {
     src: {
       type: String,

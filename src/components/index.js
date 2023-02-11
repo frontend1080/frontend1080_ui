@@ -1,7 +1,7 @@
 // 这种方式实现了全局导入或按需导入
-import Wbutton from './w-button'
+import WButton from './w-button'
 
-import Wheader from './w-header'
+import WHeader from './w-header'
 
 import LuoDateTimePicker from '@/components/LuoDateTimePicker'
 
@@ -18,8 +18,8 @@ import DYIcon from '@/components/dy-icon'
 import DYUploader from './dy-uploader'
 // 加上你们自己的导入语句导入自己的组件
 const components = {
-  Wheader,
-  Wbutton,
+  WHeader,
+  WButton,
   YdropDown,
   Yavator,
   DYMessage,
@@ -38,8 +38,8 @@ export default {
   components
 }
 export {
-  Wheader,
-  Wbutton,
+  WHeader,
+  WButton,
   YdropDown,
   Yavator,
   DYMessage,

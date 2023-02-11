@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'w-header'
+  name: 'WtsHeader'
 }
 </script>
 

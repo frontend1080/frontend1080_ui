@@ -69,7 +69,7 @@
 
 <script>
 export default {
-  name: 'yft-dropDown',
+  name: 'YftDropdown',
   props: {
     options: {
       type: Array,
