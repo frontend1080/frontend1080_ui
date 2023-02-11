@@ -43,7 +43,7 @@
         <hr/>
         <div class="date-select-footer">
           <button
-            :disabled="!dateData[1]"
+            :disabled="isAllowSelectArea && !dateData[1]"
             v-show="isNeedTime"
             :class="['date-select-footer__text',
            !isCanSelectTime && 'date-select-footer__text-disabled'

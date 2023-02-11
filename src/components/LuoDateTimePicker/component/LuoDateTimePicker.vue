@@ -93,6 +93,10 @@ export default {
     }
   },
   created () {
+    if (!this.value.length) {
+      this.dateData.push('1970-01-01')
+      this.timeData.push('00:00:00', '00:00:00')
+    }
     for (const index in this.value) {
       if (this.value[index].indexOf(' ') > -1) {
         this.dateData.push(this.value[index].slice(0, this.value[0].indexOf(' ')))
