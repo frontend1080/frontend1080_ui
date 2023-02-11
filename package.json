@@ -7,16 +7,18 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint",
-     "lib": "vue-cli-service build --name front-end1080-ui --target lib  --dest lib ./src/components/index.js"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
     "core-js": "^3.8.3",
     "vue": "^2.6.14"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@babel/preset-env": "^7.20.2",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-e2e-cypress": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
@@ -35,6 +37,7 @@
     "jest": "^27.0.5",
     "less": "^4.0.0",
     "less-loader": "^8.0.0",
+    "vue-jest": "^3.0.7",
     "vue-template-compiler": "^2.6.14"
   }
 }

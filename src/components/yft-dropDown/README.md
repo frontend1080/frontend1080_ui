@@ -23,13 +23,13 @@
 ```
 <template>
   <div id="app">
-   <yft-dropDown 
-   :options="options"
-    placehoder="-------请选择-------" 
-   :multiple = "false"
-   :isInput = "false"
-   :cascade = "false"
-   />
+      <yft-dropDown
+      :options="options"
+      placehoder="-------请选择-------"
+      :multiple = "false"
+      :isInput = "false"
+      :cascade = "false"
+      />
   </div>
 </template>
 
@@ -48,7 +48,7 @@ export default {
           label: 'Vegetables',
           options: ['Carrot', 'Potato', 'Tomato']
         }
-      ],
+      ]
     }
   }
 }

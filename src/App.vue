@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h2>这是app根组件</h2>
+    <h2>new message</h2>
   </div>
 </template>
 <script>
