@@ -6,10 +6,8 @@ import App from '@/App.vue'
 
 describe('App.vue', () => {
   it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(App, {
-      propsData: { msg }
-    })
+    const msg = '这是app根组件'
+    const wrapper = shallowMount(App)
     expect(wrapper.text()).toMatch(msg)
   })
 })
