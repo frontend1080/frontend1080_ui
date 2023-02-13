@@ -5,7 +5,7 @@
     <wts-header></wts-header>
     <dy-icon name="icon-test44"></dy-icon>
     <button @click="showMessage">点击我</button>
-  <luo-side-navigation
+    <luo-side-navigation
       :channels="channels"
       layout-way="col"
       width="200px"
@@ -16,7 +16,7 @@
     <div style="width: 500px;margin: auto;">
       <luo-date-time-picker
         v-model="selectData"
-        :is-allow-select-area="true"
+        :is-allow-select-area="false"
         :is-need-time="true"
         :min-date="1675267200"
         :max-date="1676822400"
@@ -25,19 +25,19 @@
       />
     </div>
     <yft-avator
-   :src="src"
-   alt="请选择图片"
-   shape="square"
-   size="large"
-   />
-   <yft-dropdown
-   :options="options"
-    placehoder="-------请选择-------"
-   :multiple = "false"
-   :isInput = "false"
-   :cascade = "false"
-   />
-   <dy-uploader accept="image/png, image/jpeg" :size="500*1024" :multiple="true" :on-success="uploadSuccess" :on-error="uploadError">
+      :src="src"
+      alt="请选择图片"
+      shape="square"
+      size="large"
+    />
+    <yft-dropdown
+      :options="options"
+      placehoder="-------请选择-------"
+      :multiple = "false"
+      :isInput = "false"
+      :cascade = "false"
+    />
+    <dy-uploader accept="image/png, image/jpeg" :size="500*1024" :multiple="true" :on-success="uploadSuccess" :on-error="uploadError">
       <div class="uploader-area" slot="uploader-area">
         <dy-icon name="icon-test17"></dy-icon>
         <div class="dy-uploader--text">将文件拖到此处，或<em>点击上传</em></div>
@@ -67,7 +67,6 @@ export default {
       this.activeChannel = data
     },
     changeDate (startTime, endTime) {
-      console.log(startTime, endTime)
     },
     uploadError (msg) {
       this.$message({
