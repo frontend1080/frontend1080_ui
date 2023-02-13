@@ -1,5 +1,18 @@
 module.exports = {
   presets: [
-    '@vue/cli-plugin-babel/preset'
-  ]
+    // 使可以正常运行 vue 项目，
+    '@vue/app',
+    [
+      '@babel/preset-env',
+      {
+        modules: false
+      }
+    ]
+  ],
+  env: {
+    test: {
+      presets: [['@babel/preset-env', { targets: { node: 'current' } }]]
+    }
+  }
+
 }
