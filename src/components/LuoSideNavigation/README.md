@@ -30,7 +30,7 @@
 
 **使用案例**
 
-```javascript
+```
 <template>
   <div id="app">
     <luo-side-navigation

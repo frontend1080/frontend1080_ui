@@ -15,12 +15,13 @@
 ## 使用示例
 ```
 <template>
-  <yft-avator
-   :src="src"
-   alt="请选择图片"
-   shape="square"
-   size="large"
-   />
+ <div>
+    <yft-avator
+    :src="src"
+    alt="请选择图片"
+    shape="square"
+    size="large"
+    />
   </div>
 </template>
 
@@ -30,7 +31,7 @@ export default {
   name: 'App',
   data () {
     return {
-        src: 'https://img2.baidu.com/it/u=3871150760,2588696294&fm=253&fmt=auto&app=138&f=PNG?w=256&h=256',
+      src: 'https://img2.baidu.com/it/u=3871150760,2588696294&fm=253&fmt=auto&app=138&f=PNG?w=256&h=256'
     }
   }
 }

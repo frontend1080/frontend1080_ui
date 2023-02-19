@@ -48,7 +48,7 @@ export default {
           label: 'Vegetables',
           options: ['Carrot', 'Potato', 'Tomato']
         }
-      ],
+      ]
     }
   }
 }
