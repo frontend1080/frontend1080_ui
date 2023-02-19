@@ -43,7 +43,6 @@
 ```
 <template>
   <div id="app">
-    <h2>����app�����</h2>
     <div style="width: 500px;margin: auto;">
       <luo-date-time-picker
         v-model="selectData"
