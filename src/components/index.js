@@ -1,7 +1,4 @@
 // 这种方式实现了全局导入或按需导入
-import WtsButton from './wts-button'
-
-import WtsHeader from './wts-header'
 
 import LuoDateTimePicker from '@/components/LuoDateTimePicker'
 
@@ -18,8 +15,6 @@ import DyIcon from '@/components/dy-icon'
 import DyUploader from './dy-uploader'
 // 加上你们自己的导入语句导入自己的组件
 const components = {
-  WtsButton,
-  WtsHeader,
   YftDropdown,
   YftAvator,
   DyMessage,
@@ -38,8 +33,6 @@ export default {
   components
 }
 export {
-  WtsButton,
-  WtsHeader,
   YftDropdown,
   YftAvator,
   DyMessage,

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import '../../assets/js/iconfont.js'
+import './iconfont.js'
 export default {
   name: 'DyIcon',
   props: {
