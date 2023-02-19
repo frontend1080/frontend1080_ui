@@ -1,8 +1,6 @@
 <template>
   <div id="app">
     <h2>这是app根组件</h2>
-    <wts-button></wts-button>
-    <wts-header></wts-header>
     <dy-icon name="icon-test44"></dy-icon>
     <button @click="showMessage">点击我</button>
     <luo-side-navigation
