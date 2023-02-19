@@ -2,8 +2,8 @@
   <div id="app">
    <h2>这是app根组件</h2>
   </div>
-</template>
 
+</template>
 <script>
 
 export default {
